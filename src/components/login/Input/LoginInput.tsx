@@ -28,9 +28,8 @@ function LoginInput({ labelText, name, value, type }: InputProps) {
   return (
     <div className='flex flex-col mb-4 '>
       <label>{labelText}</label>
-      <input        className={`border relative bg-gray-100 p-2 rounded-sm ${
-          errors[name] ? 'animate-shaking-error' : ''
-
+      <input className={`border relative bg-gray-100 p-2 rounded-sm ${
+          formErrors[name] ? 'animate-shaking-error' : ''
         }`}
         name={name}
         value={value}
