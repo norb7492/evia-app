@@ -1,6 +1,3 @@
-import { ChangeEvent, useState } from 'react';
-import reactLogo from './assets/react.svg';
-
 type ErrorsForm = {
   username?: string;
   password?: string;
@@ -25,10 +22,10 @@ function LoginInput({
   onChangeHandler,
 }: InputProps) {
   return (
-    <div className='flex flex-col mb-4'>
+    <div className='flex flex-col mb-4 '>
       <label>{labelText}</label>
       <input
-        className={`border relative bg-gray-100 p-2 ${
+        className={`border relative bg-gray-100 p-2 rounded-sm ${
           errors[name] ? 'animate-shaking-error' : ''
         }`}
         name={name}
