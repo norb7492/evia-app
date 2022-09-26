@@ -3,16 +3,12 @@ import { SiMicrosoft } from 'react-icons/si';
 import eviaIcon from '../../assets/evia_icon.jpg';
 import axios from 'axios';
 import LoginInput from './Input/LoginInput';
-
-type LoginForm = {
-  username: string;
-  password: string;
-};
-
-type ErrorsForm = {
-  username?: string;
-  password?: string;
-};
+import { RootState } from '../../app/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsSubmit, setFormErrors } from '../../app/slices/LoginFormSlice';
+import { LoginForm } from '../../types/LoginFormType';
+import { validate } from './LoginUtils';
+import { validateLoginUser } from '../../app/actions/UserDataActions';
 
 type Input = {
   id: number;
@@ -37,51 +33,23 @@ const inputs: Input[] = [
 ];
 
 function Login() {
-  const [loginFormValues, setLoginFormValues] = useState<LoginForm>({
-    username: '',
-    password: '',
-  });
-  const [formErrors, setFormErrorsValues] = useState<ErrorsForm>({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  const dispatch = useDispatch();
 
-  const submitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const { isSubmit, loginFormValues, formErrors } = useSelector(
+    (state: RootState) => state.login
+  );
+
+  const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormErrorsValues(validate(loginFormValues));
-    setIsSubmit(true);
-  };
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setLoginFormValues({ ...loginFormValues, [name]: value });
+    dispatch(setFormErrors(validate(loginFormValues)));
+    dispatch(setIsSubmit(true));
   };
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      const { username, password } = loginFormValues;
-      axios
-        .post('/api/login', {
-          username,
-          password,
-        })
-        .then(function (response) {
-          console.log('it worked', response);
-        })
-        .catch(function (error) {
-          console.log('yeah', error);
-        });
+      validateLoginUser(loginFormValues, dispatch);
     }
   }, [formErrors]);
-
-  const validate = (values: LoginForm) => {
-    const errors: ErrorsForm = {};
-    if (!values.username) {
-      errors.username = 'Username is required';
-    }
-    if (!values.password) {
-      errors.password = 'Password is required';
-    }
-    return errors;
-  };
 
   return (
     <div className='relative w-full h-screen bg-zinc-900/90 '>
@@ -106,8 +74,6 @@ function Login() {
               key={input.id}
               {...input}
               value={loginFormValues[input.name as keyof LoginForm]}
-              errors={formErrors}
-              onChangeHandler={onChangeHandler}
             />
           ))}
           <button
