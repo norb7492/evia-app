@@ -1,42 +1,36 @@
-import { ChangeEvent, useState } from 'react';
-import reactLogo from './assets/react.svg';
-
-type ErrorsForm = {
-  username?: string;
-  password?: string;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { setSubmitFormValues } from '../../../app/slices/LoginFormSlice';
+import { RootState } from '../../../app/store';
 
 type InputProps = {
   labelText: string;
-  errorMessage?: string;
   name: 'username' | 'password';
   value: string;
   type: string;
-  errors: ErrorsForm;
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function LoginInput({
-  labelText,
-  errors,
-  name,
-  value,
-  type,
-  onChangeHandler,
-}: InputProps) {
+function LoginInput({ labelText, name, value, type }: InputProps) {
+  const dispatch = useDispatch();
+  const { formErrors } = useSelector((state: RootState) => state.login);
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    dispatch(setSubmitFormValues({ name, value }));
+  };
+
   return (
     <div className='flex flex-col mb-4'>
       <label>{labelText}</label>
       <input
         className={`border relative bg-gray-100 p-2 ${
-          errors[name] ? 'animate-shaking-error' : ''
+          formErrors[name] ? 'animate-shaking-error' : ''
         }`}
         name={name}
         value={value}
         type={type}
         onChange={onChangeHandler}
       />
-      <p className='text-red-500'>{errors[name]}</p>
+      <p className='text-red-500'>{formErrors[name]}</p>
     </div>
   );
 }
