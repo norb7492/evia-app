@@ -2,13 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSubmitFormValues } from '../../../app/slices/LoginFormSlice';
 import { RootState } from '../../../app/store';
 
-type ErrorsForm = {
-  username?: string;
-  password?: string;
-};
-
-
-
 type InputProps = {
   labelText: string;
   name: 'username' | 'password';
