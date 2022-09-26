@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { SiMicrosoftteams } from 'react-icons/si';
+import { SiMicrosoft } from 'react-icons/si';
 import eviaIcon from '../../assets/evia_icon.jpg';
 import axios from 'axios';
 import LoginInput from './Input/LoginInput';
@@ -52,10 +52,10 @@ function Login() {
   }, [formErrors]);
 
   return (
-    <div className='relative w-full h-screen bg-zinc-900/90'>
+    <div className='relative w-full h-screen bg-zinc-900/90 '>
       <div className='flex justify-center items-center h-full'>
         <form
-          className='max-w-[400px] w-full mx-auto bg-white p-8'
+          className='max-w-[400px] w-full mx-auto bg-white p-8 rounded-md'
           onSubmit={submitLogin}
         >
           <img
@@ -64,9 +64,9 @@ function Login() {
             alt='/'
           />
           <div className='py-8 flex'>
-            <p className='border shadow hover:shadow-xl px-2 py-2 relative flex items-center'>
-              <SiMicrosoftteams className='mr-2' />
-              Microsoft Teams
+            <p className='border shadow hover:shadow-md px-2 py-2 relative flex items-center'>
+              <SiMicrosoft className='mr-2' />
+              Continue with Microsoft
             </p>
           </div>
           {inputs.map((input) => (
@@ -77,7 +77,7 @@ function Login() {
             />
           ))}
           <button
-            className='w-full py-3 mt-2 bg-lime-300 hover:bg-lime-500 font-bold relative'
+            className='w-full py-3 mt-2 bg-lime-300 hover:bg-lime-500 font-bold relative rounded-sm'
             type='submit'
           >
             Login
