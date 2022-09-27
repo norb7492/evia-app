@@ -1,14 +1,13 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SiMicrosoft } from 'react-icons/si';
 import eviaIcon from '../../assets/evia_icon.jpg';
-import axios from 'axios';
 import LoginInput from './Input/LoginInput';
 import { RootState } from '../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { setIsSubmit, setFormErrors } from '../../app/slices/LoginFormSlice';
 import { LoginForm } from '../../types/LoginFormType';
 import { validate } from './LoginUtils';
 import { validateLoginUser } from '../../app/actions/UserDataActions';
+import { useAppDispatch, useAppSelector } from '../../app/redux-hooks';
 
 type Input = {
   id: number;
@@ -33,9 +32,9 @@ const inputs: Input[] = [
 ];
 
 function Login() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { isSubmit, loginFormValues, formErrors } = useSelector(
+  const { isSubmit, loginFormValues, formErrors } = useAppSelector(
     (state: RootState) => state.login
   );
 
