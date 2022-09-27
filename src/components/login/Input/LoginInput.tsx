@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../app/redux-hooks';
 import { setSubmitFormValues } from '../../../app/slices/LoginFormSlice';
 import { RootState } from '../../../app/store';
 
@@ -10,8 +10,8 @@ type InputProps = {
 };
 
 function LoginInput({ labelText, name, value, type }: InputProps) {
-  const dispatch = useDispatch();
-  const { formErrors } = useSelector((state: RootState) => state.login);
+  const dispatch = useAppDispatch();
+  const { formErrors } = useAppSelector((state: RootState) => state.login);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -21,7 +21,8 @@ function LoginInput({ labelText, name, value, type }: InputProps) {
   return (
     <div className='flex flex-col mb-4 '>
       <label>{labelText}</label>
-      <input className={`border relative bg-gray-100 p-2 rounded-sm ${
+      <input
+        className={`border relative bg-gray-100 p-2 rounded-sm ${
           formErrors[name] ? 'animate-shaking-error' : ''
         }`}
         name={name}
