@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  FormErrors,
-  LoginState,
-  SubmitFormValues,
-} from '../../types/LoginFormType';
+import { FormErrors, LoginForm, LoginState } from '../../types/LoginFormType';
 
 const initialState: LoginState = {
   loginFormValues: {
@@ -18,13 +14,8 @@ export const loginSlice = createSlice({
   name: 'loginForm',
   initialState,
   reducers: {
-    setSubmitFormValues: (state, action: PayloadAction<SubmitFormValues>) => {
-      if (action.payload.name === 'username') {
-        state.loginFormValues.username = action.payload.value;
-      }
-      if (action.payload.name === 'password') {
-        state.loginFormValues.password = action.payload.value;
-      }
+    setFormValues: (state, action: PayloadAction<LoginForm>) => {
+      state.loginFormValues = action.payload;
     },
     setFormErrors: (state, action: PayloadAction<FormErrors>) => {
       state.formErrors = action.payload;
@@ -35,7 +26,6 @@ export const loginSlice = createSlice({
   },
 });
 
-export const { setIsSubmit, setSubmitFormValues, setFormErrors } =
-  loginSlice.actions;
+export const { setIsSubmit, setFormErrors, setFormValues } = loginSlice.actions;
 
 export default loginSlice.reducer;
