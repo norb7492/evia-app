@@ -6,11 +6,13 @@ import {
 } from '../../../app/slices/LoginFormSlice';
 import { SiMicrosoft } from 'react-icons/si';
 import eviaIcon from '../../../assets/evia_icon.jpg';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { validate } from '../LoginUtils';
 import { RootState } from '../../../app/store';
 
 function LoginForm() {
+  const [isShakeAnimationFinished, setIsShakeAnimationFinished] =
+    useState(true);
   const usernameRef = useRef<HTMLInputElement>(null!);
   const passwordRef = useRef<HTMLInputElement>(null!);
 
@@ -21,24 +23,28 @@ function LoginForm() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    dispatch(setFormErrors(validate(returnsRefPayload())));
+    dispatch(setIsSubmit(true));
+    setIsShakeAnimationFinished(false);
+  }
+
+  function shakeAnimationHandler() {
+    setIsShakeAnimationFinished(true);
+  }
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      dispatch(setFormValues(returnsRefPayload()));
+    }
+  }, [formErrors]);
+
+  function returnsRefPayload() {
     const loginFormValues = {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
     };
-
-    dispatch(setFormErrors(validate(loginFormValues)));
-    dispatch(setIsSubmit(true));
+    return loginFormValues;
   }
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      const loginFormValues = {
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
-      };
-      dispatch(setFormValues(loginFormValues));
-    }
-  }, [formErrors]);
 
   return (
     <form
@@ -62,8 +68,11 @@ function LoginForm() {
           id='text'
           ref={usernameRef}
           className={`border relative bg-gray-100 p-2 rounded-sm ${
-            formErrors['username'] && isSubmit ? 'animate-shaking-error' : ''
+            formErrors['username'] && !isShakeAnimationFinished
+              ? 'animate-shaking-error'
+              : ''
           }`}
+          onAnimationEnd={shakeAnimationHandler}
           type='username'
         />
         <p className='text-red-500'>{formErrors['username']}</p>
@@ -74,8 +83,11 @@ function LoginForm() {
           id='password'
           ref={passwordRef}
           className={`border relative bg-gray-100 p-2 rounded-sm ${
-            formErrors['password'] && isSubmit ? 'animate-shaking-error' : ''
+            formErrors['password'] && !isShakeAnimationFinished
+              ? 'animate-shaking-error'
+              : ''
           }`}
+          onAnimationEnd={shakeAnimationHandler}
           type='password'
         />
         <p className='text-red-500'>{formErrors['password']}</p>
