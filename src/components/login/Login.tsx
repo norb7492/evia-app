@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { RootState } from '../../app/store';
-import { validateLoginUser } from '../../app/actions/UserDataActions';
 import { useAppDispatch, useAppSelector } from '../../app/redux-hooks';
 import LoginForm from './login-form/LoginForm';
+import { signUpUser } from '../../app/slices/UserDataSlice';
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ function Login() {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      validateLoginUser(loginFormValues, dispatch);
+      dispatch(signUpUser(loginFormValues));
     }
   }, [loginFormValues]);
 
