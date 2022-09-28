@@ -1,8 +1,3 @@
-export interface SubmitFormValues {
-  name: string;
-  value: string;
-}
-
 export interface LoginForm {
   username: string;
   password: string;
