@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FormErrors, LoginForm, LoginState } from '../../types/LoginFormType';
+import {
+  FormErrors,
+  LoginForm,
+  LoginState,
+} from '../../../types/LoginFormType';
 
 const initialState: LoginState = {
   loginFormValues: {

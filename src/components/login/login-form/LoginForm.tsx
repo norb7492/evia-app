@@ -3,12 +3,13 @@ import {
   setFormErrors,
   setFormValues,
   setIsSubmit,
-} from '../../../app/slices/LoginFormSlice';
+} from '../store/loginFormSlice';
 import { SiMicrosoft } from 'react-icons/si';
 import eviaIcon from '../../../assets/evia_icon.jpg';
 import { useEffect, useRef, useState } from 'react';
 import { validate } from '../LoginUtils';
 import { RootState } from '../../../app/store';
+import { isEmpty } from 'lodash';
 
 function LoginForm() {
   const [isShakeAnimationFinished, setIsShakeAnimationFinished] =
@@ -33,7 +34,7 @@ function LoginForm() {
     setIsShakeAnimationFinished(true);
   }
   useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    if (isEmpty(formErrors) && isSubmit) {
       dispatch(setFormValues(returnsRefPayload()));
     }
   }, [formErrors]);

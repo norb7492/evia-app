@@ -7,8 +7,9 @@ import { Provider } from 'react-redux';
 
 import type { AppStore, RootState } from '../app/store';
 
-import loginFormReducer from './slices/LoginFormSlice';
-import userDataReducer from './slices/UserDataSlice';
+import loginFormReducer from '../components/login/store/loginFormSlice';
+import userDataReducer from './slices/userDataSlice';
+import { apiSlice } from './services/apiSlice';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -20,8 +21,14 @@ export function renderWithProviders(
   {
     preloadedState = {},
     store = configureStore({
-      reducer: { login: loginFormReducer, userData: userDataReducer },
+      reducer: {
+        login: loginFormReducer,
+        userData: userDataReducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
+      },
       preloadedState,
+      middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(apiSlice.middleware),
     }),
     ...renderOptions
   }: ExtendedRenderOptions = {}
