@@ -3,18 +3,22 @@ import {
   configureStore,
   PreloadedState,
 } from '@reduxjs/toolkit';
-import loginFormReducer from './slices/LoginFormSlice';
-import userDataReducer from './slices/UserDataSlice';
+import { apiSlice } from './services/apiSlice';
+import loginFormReducer from '../components/login/store/loginFormSlice';
+import userDataReducer from './slices/userDataSlice';
 
 const rootReducer = combineReducers({
   login: loginFormReducer,
   userData: userDataReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(apiSlice.middleware),
   });
 }
 

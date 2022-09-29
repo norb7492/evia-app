@@ -2,18 +2,27 @@ import { useEffect } from 'react';
 import { RootState } from '../../app/store';
 import { useAppDispatch, useAppSelector } from '../../app/redux-hooks';
 import LoginForm from './login-form/LoginForm';
-import { signUpUser } from '../../app/slices/UserDataSlice';
+import { useSignInMutation } from './services/loginServiceSlice';
+import { setCredentials } from '../../app/slices/userDataSlice';
 
 function Login() {
   const dispatch = useAppDispatch();
+  const [signUp] = useSignInMutation();
 
   const { isSubmit, loginFormValues, formErrors } = useAppSelector(
     (state: RootState) => state.login
   );
 
+  const signUpSaveUser = async () => {
+    const userData = await signUp(loginFormValues).unwrap();
+    if (userData.user) {
+      dispatch(setCredentials(userData.user));
+    }
+  };
+
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      dispatch(signUpUser(loginFormValues));
+      signUpSaveUser().catch(console.error);
     }
   }, [loginFormValues]);
 
