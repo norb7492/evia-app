@@ -66,6 +66,7 @@ function LoginForm() {
       <div className='flex flex-col mb-4 '>
         <label>Username</label>
         <input
+          data-testid='login-username'
           id='text'
           ref={usernameRef}
           className={`border relative bg-gray-100 p-2 rounded-sm ${
@@ -81,6 +82,7 @@ function LoginForm() {
       <div className='flex flex-col mb-4 '>
         <label>Password</label>
         <input
+          data-testid='login-password'
           id='password'
           ref={passwordRef}
           className={`border relative bg-gray-100 p-2 rounded-sm ${
@@ -96,6 +98,7 @@ function LoginForm() {
       <button
         className='w-full py-3 mt-2 bg-lime-300 hover:bg-lime-500 font-bold relative rounded-sm'
         type='submit'
+        data-testid='login-button'
       >
         Login
       </button>
