@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/redux-hooks';
 import LoginForm from './login-form/LoginForm';
 import { useSignInMutation } from './services/loginServiceSlice';
 import { setCredentials } from '../../app/slices/userDataSlice';
+import { isEmpty } from 'lodash';
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ function Login() {
   };
 
   useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    if (isEmpty(formErrors) && isSubmit) {
       signUpSaveUser().catch(console.error);
     }
   }, [loginFormValues]);
