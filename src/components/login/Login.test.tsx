@@ -1,24 +1,28 @@
-import { describe, vi } from 'vitest';
-import {
-  fireEvent,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
-import { rest } from 'msw';
+import { describe } from 'vitest';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { server } from '../../mocks/server';
 import 'whatwg-fetch';
 import Login from './Login';
 import { renderWithProviders } from '../../app/test.utils';
-import LoginForm from './login-form/LoginForm';
+import { MemoryRouter } from 'react-router-dom';
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
+function renderWithRouter() {
+  const homeRoute = '/';
+
+  return (
+    <MemoryRouter initialEntries={[homeRoute]}>
+      <Login />
+    </MemoryRouter>
+  );
+}
+
 describe('Login', () => {
   test('Render Login', () => {
-    renderWithProviders(<Login />);
+    renderWithProviders(renderWithRouter());
 
     const usernameText = screen.getByText(/Username/i);
     const passwordText = screen.getByText(/Password/i);
@@ -35,7 +39,7 @@ describe('Login', () => {
     expect(passwordError).not.toBeInTheDocument();
   });
   test('should show login error if presss login button without passing any value', () => {
-    renderWithProviders(<Login />);
+    renderWithProviders(renderWithRouter());
 
     const usernameError = screen.queryByText(/Username is required/i);
     const passwordError = screen.queryByText(/Password is required/i);
@@ -56,7 +60,7 @@ describe('Login', () => {
     expect(passwordErrorAfterButtonPress).toBeInTheDocument();
   });
   test('should just show password error message', () => {
-    renderWithProviders(<Login />);
+    renderWithProviders(renderWithRouter());
 
     const usernameError = screen.queryByText(/Username is required/i);
     const passwordError = screen.queryByText(/Password is required/i);
@@ -86,7 +90,7 @@ describe('Login', () => {
     expect(passwordErrorAfterButtonPress).toBeInTheDocument();
   });
   test('should just show username error message', () => {
-    renderWithProviders(<Login />);
+    renderWithProviders(renderWithRouter());
 
     const usernameError = screen.queryByText(/Username is required/i);
     const passwordError = screen.queryByText(/Password is required/i);
@@ -116,7 +120,7 @@ describe('Login', () => {
     expect(passwordErrorAfterButtonPress).not.toBeInTheDocument();
   });
   test('should login when all values are filled', async () => {
-    renderWithProviders(<Login />);
+    renderWithProviders(renderWithRouter());
 
     const usernameInput = screen.getByTestId('login-username');
     const passwordInput = screen.getByTestId('login-password');
@@ -137,7 +141,7 @@ describe('Login', () => {
     expect(passwordErrorAfterButtonPress).not.toBeInTheDocument();
   });
   test('should test if animation was called', async () => {
-    const { container } = renderWithProviders(<Login />);
+    renderWithProviders(renderWithRouter());
 
     const loginButtonElement = screen.getByTestId('login-button');
     const testAnimation = screen.getByTestId('login-username');

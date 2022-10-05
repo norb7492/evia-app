@@ -1,21 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { UserData } from '../../types/UserDataType';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserData, UserDetails } from '../../types/UserDataType';
 
 const initialState: UserData = {
-  username: '',
-  name: '',
-  isAuthenticated: false,
+  userDetails: {
+    username: '',
+    name: '',
+  },
+  status: 'loggedout',
 };
 
 export const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
-    setCredentials: (state, action) => {
-      state = {
-        ...action.payload,
-        isAuthenticated: true,
-      };
+    setCredentials: (state, action: PayloadAction<UserDetails>) => {
+      state.userDetails = action.payload;
+      state.status = 'loggedin';
     },
   },
 });
