@@ -5,11 +5,9 @@ import {
 } from '@reduxjs/toolkit';
 import { apiSlice } from './services/apiSlice';
 import loginFormReducer from '../components/login/store/loginFormSlice';
-import userDataReducer from './slices/userDataSlice';
 
 const rootReducer = combineReducers({
   login: loginFormReducer,
-  userData: userDataReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

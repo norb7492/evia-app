@@ -1,44 +1,49 @@
 import { useEffect } from 'react';
 import { RootState } from '../../app/store';
-import { useAppDispatch, useAppSelector } from '../../app/redux-hooks';
+import { useAppSelector } from '../../app/redux-hooks';
 import LoginForm from './login-form/LoginForm';
 import { useSignInMutation } from './services/loginServiceSlice';
-import { setCredentials } from '../../app/slices/userDataSlice';
 import { isEmpty } from 'lodash';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSignIn } from 'react-auth-kit';
 
 function Login() {
-  const dispatch = useAppDispatch();
   const [signUp] = useSignInMutation();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const redirectPath = location.state?.path || '/';
-
-  const { status } = useAppSelector((state: RootState) => state.userData);
 
   const { isSubmit, loginFormValues, formErrors } = useAppSelector(
     (state: RootState) => state.login
   );
 
+  const signIn = useSignIn();
+
+  const redirectPath = '/';
+
   const signUpSaveUser = async () => {
-    const userData = await signUp(loginFormValues).unwrap();
-    if (userData.user) {
-      dispatch(setCredentials(userData.user));
+    try {
+      const userData = await signUp(loginFormValues).unwrap();
+      if (userData.token) {
+        signIn({
+          token: userData.token,
+          expiresIn: 3600,
+          tokenType: 'Bearer',
+          authState: {
+            email: userData.email,
+            name: userData.name,
+          },
+        });
+        navigate(redirectPath, { replace: true });
+      }
+    } catch (error) {
+      console.log('some error happened');
     }
   };
 
   useEffect(() => {
     if (isEmpty(formErrors) && isSubmit) {
-      signUpSaveUser().catch(console.error);
+      signUpSaveUser();
     }
   }, [loginFormValues]);
-
-  useEffect(() => {
-    if (status === 'loggedin') {
-      navigate(redirectPath, { replace: true });
-    }
-  }, [status]);
 
   return (
     <div className='relative w-full h-screen bg-zinc-900/90 '>

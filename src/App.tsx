@@ -3,7 +3,7 @@ import './App.css';
 
 import Home from './components/home/Home';
 import Login from './components/login/Login';
-import RequireAuth from './hooks/RequireAuth';
+import { RequireAuth } from 'react-auth-kit';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Route
         path='/'
         element={
-          <RequireAuth>
+          <RequireAuth loginPath='/login'>
             <Home />
           </RequireAuth>
         }
