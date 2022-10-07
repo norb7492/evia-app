@@ -8,8 +8,8 @@ import { Provider } from 'react-redux';
 import type { AppStore, RootState } from '../app/store';
 
 import loginFormReducer from '../components/login/store/loginFormSlice';
-import userDataReducer from './slices/userDataSlice';
 import { apiSlice } from './services/apiSlice';
+import { AuthProvider } from 'react-auth-kit';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -23,7 +23,6 @@ export function renderWithProviders(
     store = configureStore({
       reducer: {
         login: loginFormReducer,
-        userData: userDataReducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
       },
       preloadedState,
@@ -34,7 +33,18 @@ export function renderWithProviders(
   }: ExtendedRenderOptions = {}
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <Provider store={store}>
+        <AuthProvider
+          authType={'cookie'}
+          authName={'_auth'}
+          cookieDomain={window.location.hostname}
+          cookieSecure={false}
+        >
+          {children}
+        </AuthProvider>
+      </Provider>
+    );
   }
 
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
