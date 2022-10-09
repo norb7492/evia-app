@@ -44,7 +44,7 @@ describe('App Routing', () => {
     fireEvent.click(loginButtonElement);
 
     await waitFor(() => {
-      const homeScreenText = screen.queryByText(/Easy Tasks Manager/i);
+      const homeScreenText = screen.queryByText(/Hello Dashboard/i);
       expect(homeScreenText).toBeInTheDocument();
     });
   });
