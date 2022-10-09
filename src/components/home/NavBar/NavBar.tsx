@@ -4,7 +4,7 @@ import { BsListTask } from 'react-icons/bs';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { RiTeamLine } from 'react-icons/ri';
 import { MdOutlineQueryStats } from 'react-icons/md';
-import { FiSettings } from 'react-icons/fi';
+import { FiLogOut, FiPower, FiSettings } from 'react-icons/fi';
 import { CgLogOff } from 'react-icons/cg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit';
@@ -89,7 +89,7 @@ function NavBar() {
           onClick={logout}
         >
           <span className='text-2xl block float-left'>
-            <FiSettings />
+            <FiPower />
           </span>
           <span className='text-base font-medium flex-1'>Get Out</span>
         </li>
