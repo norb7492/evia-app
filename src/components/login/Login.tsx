@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { RootState } from '../../app/store';
-import { useAppSelector } from '../../app/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../app/redux-hooks';
 import LoginForm from './login-form/LoginForm';
 import { useSignInMutation } from './services/loginServiceSlice';
 import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
+import { setIsSubmit } from './store/loginFormSlice';
 
 function Login() {
   const [signUp] = useSignInMutation();
@@ -14,6 +15,8 @@ function Login() {
   const { isSubmit, loginFormValues, formErrors } = useAppSelector(
     (state: RootState) => state.login
   );
+
+  const dispatch = useAppDispatch();
 
   const signIn = useSignIn();
 
@@ -41,6 +44,7 @@ function Login() {
 
   useEffect(() => {
     if (isEmpty(formErrors) && isSubmit) {
+      dispatch(setIsSubmit(false));
       signUpSaveUser();
     }
   }, [loginFormValues]);
