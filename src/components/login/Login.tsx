@@ -7,6 +7,7 @@ import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
 import { setIsSubmit } from './store/loginFormSlice';
+import loginBG from '../../assets/login_bg.jpg'
 
 function Login() {
   const [signUp] = useSignInMutation();
@@ -50,7 +51,11 @@ function Login() {
   }, [loginFormValues]);
 
   return (
-    <div className='relative w-full h-screen bg-zinc-900/90 '>
+    <div className='relative w-full h-screen'>
+      <div className='fixed blur-sm -z-10 bg-center bg-auto'>
+        <img src={loginBG} alt=""/>
+      </div>
+
       <div className='flex justify-center items-center h-full'>
         <LoginForm />
       </div>

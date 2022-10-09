@@ -4,11 +4,9 @@ import { BsListTask } from 'react-icons/bs';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { RiTeamLine } from 'react-icons/ri';
 import { MdOutlineQueryStats } from 'react-icons/md';
-import { FiLogOut, FiPower, FiSettings } from 'react-icons/fi';
-import { CgLogOff } from 'react-icons/cg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit';
-
+import { FiPower, FiSettings } from 'react-icons/fi';
 function NavBar() {
   const singOut = useSignOut();
   const navigate = useNavigate();
