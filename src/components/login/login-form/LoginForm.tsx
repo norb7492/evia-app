@@ -5,16 +5,17 @@ import {
   setIsSubmit,
 } from '../store/loginFormSlice';
 import { SiMicrosoft } from 'react-icons/si';
-import eviaIcon from '../../../assets/evia_icon.jpg';
+import eviaIcon from '../../../assets/evia_icon.png';
 import { useEffect, useRef, useState } from 'react';
 import { validate } from '../LoginUtils';
 import { RootState } from '../../../app/store';
 import { isEmpty } from 'lodash';
+import { FiLogIn } from 'react-icons/fi';
 
 function LoginForm() {
   const [isShakeAnimationFinished, setIsShakeAnimationFinished] =
     useState(true);
-  const usernameRef = useRef<HTMLInputElement>(null!);
+  const emailRef = useRef<HTMLInputElement>(null!);
   const passwordRef = useRef<HTMLInputElement>(null!);
 
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ function LoginForm() {
 
   function returnsRefPayload() {
     const loginFormValues = {
-      username: usernameRef.current.value,
+      email: emailRef.current.value,
       password: passwordRef.current.value,
     };
     return loginFormValues;
@@ -49,7 +50,7 @@ function LoginForm() {
 
   return (
     <form
-      className='max-w-[400px] w-full mx-auto bg-white p-8 rounded-md'
+      className='max-w-[600px] w-full mx-auto bg-neutral-50 p-8 rounded-md'
       onSubmit={handleSubmit}
     >
       <img
@@ -57,58 +58,63 @@ function LoginForm() {
         src={eviaIcon}
         alt='/'
       />
-      <div className='py-8 flex'>
+      <div className='text-3xl text-center'>Welcome</div>
+      <div className='text-xl text-center'>login to access your account</div>
+      <div className='py-8 flex '>
         <p className='border shadow hover:shadow-md px-2 py-2 relative flex items-center'>
           <SiMicrosoft className='mr-2' />
           Continue with Microsoft
         </p>
       </div>
       <div className='flex flex-col mb-4 '>
-        <label>Username</label>
+        <label>E-mail</label>
         <input
-          data-testid='login-username'
+          placeholder='user@email.com'
+          data-testid='login-email'
           id='text'
-          ref={usernameRef}
-          className={`border relative bg-gray-100 p-2 rounded-sm ${
-            formErrors['username'] && !isShakeAnimationFinished
-              ? 'animate-shaking-error'
-              : ''
-          }`}
+          ref={emailRef}
+          className={`border relative bg-gray-100 p-2 rounded-sm ${formErrors['email'] && !isShakeAnimationFinished
+            ? 'animate-shaking-error'
+            : ''
+            }`}
           onAnimationEnd={shakeAnimationHandler}
-          type='username'
+          type='email'
         />
-        <p className='text-red-500'>{formErrors['username']}</p>
+        <p className='text-red-500'>{formErrors['email']}</p>
       </div>
       <div className='flex flex-col mb-4 '>
         <label>Password</label>
         <input
+          placeholder='Password'
           data-testid='login-password'
           id='password'
           ref={passwordRef}
-          className={`border relative bg-gray-100 p-2 rounded-sm ${
-            formErrors['password'] && !isShakeAnimationFinished
-              ? 'animate-shaking-error'
-              : ''
-          }`}
+          className={`border relative bg-gray-100 p-2 rounded-sm ${formErrors['password'] && !isShakeAnimationFinished
+            ? 'animate-shaking-error'
+            : ''
+            }`}
           onAnimationEnd={shakeAnimationHandler}
           type='password'
         />
-        <p className='text-red-500'>{formErrors['password']}</p>
+        <span role={'password-error'} className='text-red-500'>{formErrors['password']}</span>
       </div>
-      <button
-        className='w-full py-3 mt-2 bg-lime-300 hover:bg-lime-500 font-bold relative rounded-sm'
-        type='submit'
-        data-testid='login-button'
-      >
-        Login
-      </button>
+
       <p className='flex items-center mt-2'>
         <input
           className='mr-2'
           type='checkbox'
         />
-        Remember me
+        Don't forget me
       </p>
+      <div className='flex justify-center'>
+        <button
+          className='w-[120px] text-white py-3 px-4 mt-2 bg-lime-300 hover:bg-lime-500 font-bold rounded-md border-b-4 border-lime-600'
+          type='submit'
+          data-testid='login-button'
+        >
+          <span className='flex flex-row'><FiLogIn className='mr-4 mt-1'/>Login</span>
+        </button>
+      </div>
     </form>
   );
 }

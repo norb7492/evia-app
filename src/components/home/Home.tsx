@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import eviaOffwhiteLogo from '../../assets/evia_icon_white.png';
 import NavBar from './NavBar/NavBar';
 
 function Home() {
@@ -6,7 +7,7 @@ function Home() {
     <div className='flex'>
       <div className=' bg-slate-800 h-screen p-2 pt-8 w-60'>
         <div>
-          <h1 className='float-center text-center text-white'>Evia</h1>
+          <img src={eviaOffwhiteLogo} alt="evia logo offwhite" />
         </div>
         <NavBar />
       </div>

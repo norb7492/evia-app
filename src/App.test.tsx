@@ -19,7 +19,7 @@ describe('App Routing', () => {
       </MemoryRouter>
     );
 
-    const usernameText = screen.queryByText(/Username/i);
+    const usernameText = screen.queryByText(/E-mail/i);
     const passwordText = screen.queryByText(/Password/i);
 
     expect(usernameText).toBeInTheDocument();
@@ -33,10 +33,10 @@ describe('App Routing', () => {
       </MemoryRouter>
     );
 
-    const usernameInput = screen.getByTestId('login-username');
+    const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
 
-    fireEvent.change(usernameInput, { target: { value: 'babundo7492' } });
+    fireEvent.change(emailInput, { target: { value: 'babundo7492@gmail.com' } });
     fireEvent.change(passwordInput, { target: { value: '1234' } });
 
     const loginButtonElement = screen.getByTestId('login-button');
