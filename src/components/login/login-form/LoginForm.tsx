@@ -15,7 +15,7 @@ import { FiLogIn } from 'react-icons/fi';
 function LoginForm() {
   const [isShakeAnimationFinished, setIsShakeAnimationFinished] =
     useState(true);
-  const usernameRef = useRef<HTMLInputElement>(null!);
+  const emailRef = useRef<HTMLInputElement>(null!);
   const passwordRef = useRef<HTMLInputElement>(null!);
 
   const dispatch = useAppDispatch();
@@ -42,7 +42,7 @@ function LoginForm() {
 
   function returnsRefPayload() {
     const loginFormValues = {
-      username: usernameRef.current.value,
+      email: emailRef.current.value,
       password: passwordRef.current.value,
     };
     return loginFormValues;
@@ -70,17 +70,17 @@ function LoginForm() {
         <label>E-mail</label>
         <input
           placeholder='user@email.com'
-          data-testid='login-username'
+          data-testid='login-email'
           id='text'
-          ref={usernameRef}
-          className={`border relative bg-gray-100 p-2 rounded-sm ${formErrors['username'] && !isShakeAnimationFinished
+          ref={emailRef}
+          className={`border relative bg-gray-100 p-2 rounded-sm ${formErrors['email'] && !isShakeAnimationFinished
             ? 'animate-shaking-error'
             : ''
             }`}
           onAnimationEnd={shakeAnimationHandler}
-          type='username'
+          type='email'
         />
-        <p className='text-red-500'>{formErrors['username']}</p>
+        <p className='text-red-500'>{formErrors['email']}</p>
       </div>
       <div className='flex flex-col mb-4 '>
         <label>Password</label>
@@ -96,7 +96,7 @@ function LoginForm() {
           onAnimationEnd={shakeAnimationHandler}
           type='password'
         />
-        <p className='text-red-500'>{formErrors['password']}</p>
+        <span role={'password-error'} className='text-red-500'>{formErrors['password']}</span>
       </div>
 
       <p className='flex items-center mt-2'>

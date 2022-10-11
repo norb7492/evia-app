@@ -4,7 +4,7 @@ import { validate } from './LoginUtils';
 describe('validate', () => {
   it('it should not return any errors', () => {
     const validateErrors = validate({
-      username: 'babundo7492',
+      email: 'babundo7492@gmail.com',
       password: '1234',
     });
 
@@ -13,35 +13,35 @@ describe('validate', () => {
 
   it('it should return errors for all fields', () => {
     const validateErrors = validate({
-      username: '',
+      email: '',
       password: '',
     });
 
     expect(validateErrors).toEqual({
-      username: 'Username is required',
-      password: 'Password is required',
+      email: 'Hey! Type your email.',
+      password: 'I need your password there.',
     });
   });
 
-  it('it should return error for username', () => {
+  it('it should return error for email', () => {
     const validateErrors = validate({
-      username: '',
+      email: '',
       password: '1234',
     });
 
     expect(validateErrors).toEqual({
-      username: 'Username is required',
+      email: 'Hey! Type your email.',
     });
   });
 
   it('it should return error for password', () => {
     const validateErrors = validate({
-      username: 'babundo7492',
+      email: 'babundo7492@gmail.com',
       password: '',
     });
 
     expect(validateErrors).toEqual({
-      password: 'Password is required',
+      password: 'I need your password there.',
     });
   });
 });

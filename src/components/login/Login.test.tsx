@@ -24,133 +24,133 @@ describe('Login', () => {
   test('Render Login', () => {
     renderWithProviders(renderWithRouter());
 
-    const usernameText = screen.getByText(/Username/i);
+    const emailText = screen.getByText(/E-mail/i);
     const passwordText = screen.getByText(/Password/i);
-    const usernameInput = screen.getByTestId('login-username');
+    const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
-    const usernameError = screen.queryByText(/Username is required/i);
-    const passwordError = screen.queryByText(/Password is required/i);
+    const emailError = screen.queryByText(/Hey! Type your email./i);
+    const passwordError = screen.queryByRole('password-error',{name:(/I need your password there./i)});
 
-    expect(usernameText).toBeInTheDocument();
+    expect(emailText).toBeInTheDocument();
     expect(passwordText).toBeInTheDocument();
-    expect(usernameInput).toHaveDisplayValue('');
+    expect(emailInput).toHaveDisplayValue('');
     expect(passwordInput).toHaveDisplayValue('');
-    expect(usernameError).not.toBeInTheDocument();
+    expect(emailError).not.toBeInTheDocument();
     expect(passwordError).not.toBeInTheDocument();
   });
-  test('should show login error if presss login button without passing any value', () => {
+  test('should show login error if press login button without passing any value', () => {
     renderWithProviders(renderWithRouter());
 
-    const usernameError = screen.queryByText(/Username is required/i);
-    const passwordError = screen.queryByText(/Password is required/i);
+    const emailError = screen.queryByText(/Hey! Type your email./i);
+    const passwordError = screen.queryByRole('password-error',{name:(/I need your password there./i)});
 
-    expect(usernameError).not.toBeInTheDocument();
+    expect(emailError).not.toBeInTheDocument();
     expect(passwordError).not.toBeInTheDocument();
 
     const loginButtonElement = screen.getByTestId('login-button');
 
     fireEvent.click(loginButtonElement);
 
-    const usernameErrorAfterButtonPress =
-      screen.getByText(/Username is required/i);
+    const emailErrorAfterButtonPress =
+      screen.getByText(/Hey! Type your email./i);
     const passwordErrorAfterButtonPress =
-      screen.getByText(/Password is required/i);
+    screen.queryByRole('password-error',{name:(/I need your password there./i)});
 
-    expect(usernameErrorAfterButtonPress).toBeInTheDocument();
+    expect(emailErrorAfterButtonPress).toBeInTheDocument();
     expect(passwordErrorAfterButtonPress).toBeInTheDocument();
   });
   test('should just show password error message', () => {
     renderWithProviders(renderWithRouter());
 
-    const usernameError = screen.queryByText(/Username is required/i);
-    const passwordError = screen.queryByText(/Password is required/i);
-    const usernameInput = screen.getByTestId('login-username');
+    const emailError = screen.queryByText(/Hey! Type your email./i);
+    const passwordError = screen.queryByRole('password-error',{name:(/I need your password there./i)});
+    const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
 
-    expect(usernameInput).toHaveDisplayValue('');
+    expect(emailInput).toHaveDisplayValue('');
     expect(passwordInput).toHaveDisplayValue('');
-    expect(usernameError).not.toBeInTheDocument();
+    expect(emailError).not.toBeInTheDocument();
     expect(passwordError).not.toBeInTheDocument();
 
-    fireEvent.change(usernameInput, { target: { value: 'babundo' } });
+    fireEvent.change(emailInput, { target: { value: 'babundo7492@gmail.com' } });
 
-    const usernameInputAfterChange = screen.getByTestId('login-username');
-    expect(usernameInputAfterChange).toHaveDisplayValue('babundo');
+    const emailInputAfterChange = screen.getByTestId('login-email');
+    expect(emailInputAfterChange).toHaveDisplayValue('babundo7492@gmail.com');
 
     const loginButtonElement = screen.getByTestId('login-button');
 
     fireEvent.click(loginButtonElement);
 
-    const usernameErrorAfterButtonPress =
-      screen.queryByText(/Username is required/i);
+    const emailErrorAfterButtonPress =
+      screen.queryByText(/Hey! Type your email./i);
     const passwordErrorAfterButtonPress =
-      screen.getByText(/Password is required/i);
+    screen.queryByRole('password-error',{name:(/I need your password there./i)});
 
-    expect(usernameErrorAfterButtonPress).not.toBeInTheDocument();
+    expect(emailErrorAfterButtonPress).not.toBeInTheDocument();
     expect(passwordErrorAfterButtonPress).toBeInTheDocument();
   });
-  test('should just show username error message', () => {
+  test('should just show email error message', () => {
     renderWithProviders(renderWithRouter());
 
-    const usernameError = screen.queryByText(/Username is required/i);
-    const passwordError = screen.queryByText(/Password is required/i);
-    const usernameInput = screen.getByTestId('login-username');
+    const emailError = screen.queryByText(/Hey! Type your email./i);
+    const passwordError = screen.queryByRole('password-error',{name:(/I need your password there./i)});
+    const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
 
-    expect(usernameInput).toHaveDisplayValue('');
+    expect(emailInput).toHaveDisplayValue('');
     expect(passwordInput).toHaveDisplayValue('');
-    expect(usernameError).not.toBeInTheDocument();
+    expect(emailError).not.toBeInTheDocument();
     expect(passwordError).not.toBeInTheDocument();
 
     fireEvent.change(passwordInput, { target: { value: 'babundoPassword' } });
 
-    const usernameInputAfterChange = screen.getByTestId('login-password');
-    expect(usernameInputAfterChange).toHaveDisplayValue('babundoPassword');
+    const emailInputAfterChange = screen.getByTestId('login-password');
+    expect(emailInputAfterChange).toHaveDisplayValue('babundoPassword');
 
     const loginButtonElement = screen.getByTestId('login-button');
 
     fireEvent.click(loginButtonElement);
 
-    const usernameErrorAfterButtonPress =
-      screen.queryByText(/Username is required/i);
+    const emailErrorAfterButtonPress =
+      screen.queryByText(/Hey! Type your email./i);
     const passwordErrorAfterButtonPress =
-      screen.queryByText(/Password is required/i);
+      screen.queryByRole('password-error',{name:(/I need your password there./i)});
 
-    expect(usernameErrorAfterButtonPress).toBeInTheDocument();
+    expect(emailErrorAfterButtonPress).toBeInTheDocument();
     expect(passwordErrorAfterButtonPress).not.toBeInTheDocument();
   });
   test('should login when all values are filled', async () => {
     renderWithProviders(renderWithRouter());
 
-    const usernameInput = screen.getByTestId('login-username');
+    const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
 
-    fireEvent.change(usernameInput, { target: { value: 'babundo7492' } });
+    fireEvent.change(emailInput, { target: { value: 'babundo7492@gmail.com' } });
     fireEvent.change(passwordInput, { target: { value: '1234' } });
 
     const loginButtonElement = screen.getByTestId('login-button');
 
     fireEvent.click(loginButtonElement);
 
-    const usernameErrorAfterButtonPress =
-      screen.queryByText(/Username is required/i);
+    const emailErrorAfterButtonPress =
+      screen.queryByText(/Hey! Type your email./i);
     const passwordErrorAfterButtonPress =
-      screen.queryByText(/Password is required/i);
+      screen.queryByRole('password-error',{name:(/I need your password there./i)});
 
-    expect(usernameErrorAfterButtonPress).not.toBeInTheDocument();
+    expect(emailErrorAfterButtonPress).not.toBeInTheDocument();
     expect(passwordErrorAfterButtonPress).not.toBeInTheDocument();
   });
   test('should test if animation was called', async () => {
     renderWithProviders(renderWithRouter());
 
     const loginButtonElement = screen.getByTestId('login-button');
-    const testAnimation = screen.getByTestId('login-username');
+    const testAnimation = screen.getByTestId('login-email');
 
     expect(testAnimation).not.toHaveClass('animate-shaking-error');
 
     fireEvent.click(loginButtonElement);
 
-    const testAnimationAfterClick = screen.getByTestId('login-username');
+    const testAnimationAfterClick = screen.getByTestId('login-email');
 
     await waitFor(() => {
       expect(testAnimationAfterClick).toHaveClass('animate-shaking-error');
