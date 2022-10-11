@@ -54,7 +54,7 @@ describe('Login', () => {
     const emailErrorAfterButtonPress =
       screen.getByText(/Hey! Type your email./i);
     const passwordErrorAfterButtonPress =
-    screen.queryByRole('password-error',{name:(/I need your password there./i)});
+    screen.getByText(/I need your password there./i);
 
     expect(emailErrorAfterButtonPress).toBeInTheDocument();
     expect(passwordErrorAfterButtonPress).toBeInTheDocument();
@@ -63,7 +63,7 @@ describe('Login', () => {
     renderWithProviders(renderWithRouter());
 
     const emailError = screen.queryByText(/Hey! Type your email./i);
-    const passwordError = screen.queryByRole('password-error',{name:(/I need your password there./i)});
+    const passwordError = screen.queryByText(/I need your password there./i);
     const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
 
@@ -84,7 +84,7 @@ describe('Login', () => {
     const emailErrorAfterButtonPress =
       screen.queryByText(/Hey! Type your email./i);
     const passwordErrorAfterButtonPress =
-    screen.queryByRole('password-error',{name:(/I need your password there./i)});
+        screen.queryByText(/I need your password there./i);
 
     expect(emailErrorAfterButtonPress).not.toBeInTheDocument();
     expect(passwordErrorAfterButtonPress).toBeInTheDocument();
@@ -93,7 +93,7 @@ describe('Login', () => {
     renderWithProviders(renderWithRouter());
 
     const emailError = screen.queryByText(/Hey! Type your email./i);
-    const passwordError = screen.queryByRole('password-error',{name:(/I need your password there./i)});
+    const passwordError = screen.queryByText(/I need your password there./i);
     const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
 
@@ -135,7 +135,7 @@ describe('Login', () => {
     const emailErrorAfterButtonPress =
       screen.queryByText(/Hey! Type your email./i);
     const passwordErrorAfterButtonPress =
-      screen.queryByRole('password-error',{name:(/I need your password there./i)});
+        screen.queryByText(/I need your password there./i);
 
     expect(emailErrorAfterButtonPress).not.toBeInTheDocument();
     expect(passwordErrorAfterButtonPress).not.toBeInTheDocument();
