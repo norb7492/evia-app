@@ -9,6 +9,7 @@ createServer({
       id: 1,
       username: 'babundo7492',
       password: '1234',
+      email: 'babundo7492@gmail.com',
       name: 'babundo',
     });
   },
@@ -16,9 +17,9 @@ createServer({
     this.namespace = 'api';
 
     this.post('/login', (schema, request) => {
-      let { username, password } = JSON.parse(request.requestBody);
+      let { email, password } = JSON.parse(request.requestBody);
 
-      if (!username || !password) {
+      if (!email || !password) {
         return new Response(
           400,
           {},
@@ -26,7 +27,7 @@ createServer({
         );
       }
 
-      let foundUser = schema.users.findBy({ username, password });
+      let foundUser = schema.users.findBy({ email, password });
 
       if (!foundUser) {
         return new Response(401, {}, { errors: ['user not found'] });
