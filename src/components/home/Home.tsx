@@ -5,7 +5,7 @@ import NavBar from './NavBar/NavBar';
 function Home() {
   return (
     <div className='flex'>
-      <div className=' bg-slate-800 h-screen p-2 pt-8 w-60'>
+      <div className=' bg-slate-800 h-auto p-2 pt-8 w-60'>
         <div>
           <img
             src={eviaOffwhiteLogo}

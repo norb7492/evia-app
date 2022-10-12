@@ -2,7 +2,7 @@ import { describe } from 'vitest';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import 'whatwg-fetch';
 import { server } from './mocks/server';
-import { renderWithProviders } from './app/test.utils';
+import { renderWithAuthProviders } from './app/test.utils';
 import App from './App';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ afterAll(() => server.close());
 describe('App Routing', () => {
   test('Should Route to Login screen if user is not logged in', () => {
     const homeRoute = '/';
-    renderWithProviders(
+    renderWithAuthProviders(
       <MemoryRouter initialEntries={[homeRoute]}>
         <App />
       </MemoryRouter>
@@ -27,7 +27,7 @@ describe('App Routing', () => {
   });
   test('Should Route to Home screen when user is logged in', async () => {
     const homeRoute = '/';
-    renderWithProviders(
+    renderWithAuthProviders(
       <MemoryRouter initialEntries={[homeRoute]}>
         <App />
       </MemoryRouter>
@@ -36,7 +36,9 @@ describe('App Routing', () => {
     const emailInput = screen.getByTestId('login-email');
     const passwordInput = screen.getByTestId('login-password');
 
-    fireEvent.change(emailInput, { target: { value: 'babundo7492@gmail.com' } });
+    fireEvent.change(emailInput, {
+      target: { value: 'babundo7492@gmail.com' },
+    });
     fireEvent.change(passwordInput, { target: { value: '1234' } });
 
     const loginButtonElement = screen.getByTestId('login-button');
@@ -44,7 +46,7 @@ describe('App Routing', () => {
     fireEvent.click(loginButtonElement);
 
     await waitFor(() => {
-      const homeScreenText = screen.queryByText(/Hello Dashboard/i);
+      const homeScreenText = screen.queryByText(/What's up!/i);
       expect(homeScreenText).toBeInTheDocument();
     });
   });
