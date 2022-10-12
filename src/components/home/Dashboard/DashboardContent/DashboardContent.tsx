@@ -6,10 +6,10 @@ function DashboardContent() {
         <div className="bg-[#252020] rounded-xl w-[450px] h-[400px]">
           <div className="flex justify-around">         
           <div className="py-5">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="text-xl text-white font-bold hover:text-lime-400 ">Expand</a>
+            <p className="text-xl text-white font-bold">Task Status:</p>
           </div>
           {/* legend text and colors start */}
-          <div className="">
+          <div>
             <div className="flex space-x-4 text-white font-bold">
               <p>New</p>
               <p>Working</p>
@@ -30,7 +30,7 @@ function DashboardContent() {
           </div>
           </div>
 
-          <div id="task-row" className="">
+          <div id="task-row" className="hover:cursor-pointer">
                 <div className="flex border border-4 border-[#136a04] bg-white rounded-xl w-[450px] py-2 justify-around">
               <span className="text-[#C2BBBB] font-bold text-xl self-center">
                 #01
