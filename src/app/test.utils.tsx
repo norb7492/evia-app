@@ -33,6 +33,29 @@ export function renderWithProviders(
   }: ExtendedRenderOptions = {}
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
+    return <Provider store={store}>{children}</Provider>;
+  }
+
+  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
+
+export function renderWithAuthProviders(
+  ui: React.ReactElement,
+  {
+    preloadedState = {},
+    store = configureStore({
+      reducer: {
+        login: loginFormReducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
+      },
+      preloadedState,
+      middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(apiSlice.middleware),
+    }),
+    ...renderOptions
+  }: ExtendedRenderOptions = {}
+) {
+  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return (
       <Provider store={store}>
         <AuthProvider
