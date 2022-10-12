@@ -1,5 +1,8 @@
 function Projects() {
-  return <h1>Hello Projects</h1>;
+  return( 
+  <div className='h-auto text-white bg-black'>
+Content
+  </div>);
 }
 
 export default Projects;

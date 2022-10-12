@@ -4,7 +4,7 @@ import NavBar from './NavBar/NavBar';
 
 function Home() {
   return (
-    <div className='flex'>
+    <div className='flex bg-[#252020]'>
       <div className=' bg-slate-800 h-auto p-2 pt-8 w-60'>
         <div>
           <img
@@ -12,7 +12,9 @@ function Home() {
             alt='evia logo offwhite'
           />
         </div>
-        <NavBar />
+        <aside className='h-screen relative'>
+          <NavBar />
+        </aside>
       </div>
 
       <div className='w-screen'>
