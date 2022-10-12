@@ -12,7 +12,7 @@ function Home() {
             alt='evia logo offwhite'
           />
         </div>
-        <aside className='h-screen relative'>
+        <aside className='h-screen'>
           <NavBar />
         </aside>
       </div>
