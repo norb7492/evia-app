@@ -7,6 +7,7 @@ import { MdOutlineQueryStats } from 'react-icons/md';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit';
 import { FiPower, FiSettings } from 'react-icons/fi';
+
 function NavBar() {
   const singOut = useSignOut();
   const navigate = useNavigate();
@@ -65,34 +66,33 @@ function NavBar() {
     'text-white flex items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-400 hover:text-slate-800 rounded-md mt-2';
 
   return (
-    <nav className=''>
-      <ul>
-        {Navigation.map((navigation) => (
-          <NavLink
-            to={navigation.link}
-            key={navigation.id}
-          >
-            <li className={liStyling}>
-              <span className='text-2xl block float-left'>
-                {navigation.icon}
-              </span>
-              <span className='text-base font-medium flex-1'>
-                {navigation.title}
-              </span>
-            </li>
-          </NavLink>
-        ))}
-        <li
-          className={liStyling}
-          onClick={logout}
+    <ul>
+      {Navigation.map((navigation) => (
+        <NavLink
+          to={navigation.link}
+          key={navigation.id}
         >
-          <span className='text-2xl block float-left'>
-            <FiPower />
-          </span>
-          <span className='text-base font-medium flex-1'>Get Out</span>
-        </li>
-      </ul>
-    </nav>
+          <li className={liStyling}>
+            <span className='text-2xl block float-left'>
+              {navigation.icon}
+            </span>
+            <span className='text-base font-medium flex-1'>
+              {navigation.title}
+            </span>
+          </li>
+        </NavLink>
+      ))}
+      <hr className='my-2' />
+      <li
+        className={liStyling}
+        onClick={logout}
+      >
+        <span className='text-2xl block float-left'>
+          <FiPower />
+        </span>
+        <span className='text-base font-medium flex-1'>Get Out</span>
+      </li>
+    </ul>
   );
 }
 

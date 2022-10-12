@@ -1,7 +1,7 @@
 function DashboardContent() {
   return (
     <div className='bg-slate-700 h-3/4 m-4 rounded-xl p-6'>
-      <section className="grid gap-10 grid-cols-3 grid-rows-2 justify-items-stretch grid-flow-col md:grid-flow-row sm:grid-flow-row">
+      <section className="grid gap-10 grid-cols-2 grid-rows-2 justify-items-stretch grid-flow-col md:grid-flow-row sm:grid-flow-row">
         {/* Widget place start */}
         <div className="bg-[#252020] rounded-xl w-[450px] h-[400px]">
           <div className="flex justify-around">         
@@ -51,11 +51,9 @@ function DashboardContent() {
         </div>
         {/* widget place end */}
 
-        <div>Content 2</div>
-        <div>Content 3</div>
-        <div>Content 1</div>
-        <div>Content 2</div>
-        <div>Content 3</div>
+        <div>Widget 2</div>
+        <div>Widget 3</div>
+        <div>Widget 4</div>
       </section>
     </div>
   );
