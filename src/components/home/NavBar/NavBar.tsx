@@ -65,7 +65,7 @@ function NavBar() {
     'text-white flex items-center gap-x-4 cursor-pointer p-2 hover:bg-gray-400 hover:text-slate-800 rounded-md mt-2';
 
   return (
-    <nav className='pt-6'>
+    <nav className=''>
       <ul>
         {Navigation.map((navigation) => (
           <NavLink
