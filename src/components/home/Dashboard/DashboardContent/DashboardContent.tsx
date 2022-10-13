@@ -60,8 +60,8 @@ function DashboardContent() {
           </div>
           <hr />
           <div id='user-message-item' className='hover:cursor-pointer text-white'>
-            <div className='flex w-auto py-2 px-4'>
-              <div id='user-picture'>
+            <div className='flex w-auto py-4 px-4'>
+              <div id='user-picture' className=' border border-4 rounded-full'>
                 <img src='https://randomuser.me/api/portraits/women/39.jpg' alt='' className='rounded-full h-20' />
               </div>
               <div className='flex flex-col px-4 justify-center'>
