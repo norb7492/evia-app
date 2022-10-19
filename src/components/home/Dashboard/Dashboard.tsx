@@ -1,5 +1,5 @@
-import DashboardContent from './DashboardContent/DashboardContent';
-import DashboardHeader from './DashboardHeader/DashboardHeader';
+import DashboardContent from './dashboard-content/DashboardContent';
+import DashboardHeader from './dashboard-header/DashboardHeader';
 
 function Dashboard() {
   return (
