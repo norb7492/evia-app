@@ -1,4 +1,24 @@
+import { Task } from '../../../../../types/TaskType';
+import { useGetAllTasksQuery } from '../../service/dashboardServiceSlice';
+import TaskItem from './task-item/TaskItem';
+
+function renderTaskItems(tasksData?: Task[]) {
+  if (tasksData) {
+    return tasksData.map((task) => (
+      <TaskItem
+        key={task.id}
+        id={task.id}
+        taskName={task.taskName}
+        finishedDate={task.finishedDate}
+        deadline={task.deadline}
+      />
+    ));
+  }
+}
+
 function TasksComponent() {
+  const { data: tasks } = useGetAllTasksQuery();
+
   return (
     <div className='bg-[#252020] rounded-xl w-[450px] h-[400px]'>
       <div className='flex justify-around'>
@@ -24,26 +44,7 @@ function TasksComponent() {
           <p>My Tasks</p>
         </div>
       </div>
-
-      <div
-        id='task-row'
-        className='hover:cursor-pointer'
-      >
-        <div className='flex border border-4 border-[#136a04] bg-white rounded-xl w-[450px] py-2 justify-around'>
-          <span className='text-[#C2BBBB] font-bold text-xl self-center'>
-            #01
-          </span>
-          <span className='text-xl self-center'>SEO Key analysis</span>
-          <div className='flex flex-col'>
-            <span>Finished at:</span>
-            <span>27 Sep 2022</span>
-          </div>
-          <div className='flex flex-col'>
-            <span>Deadline:</span>
-            <span>03 Oct 2022</span>
-          </div>
-        </div>
-      </div>
+      {renderTaskItems(tasks)}
     </div>
   );
 }

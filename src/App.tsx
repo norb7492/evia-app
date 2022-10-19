@@ -4,14 +4,14 @@ import './App.css';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import { RequireAuth } from 'react-auth-kit';
-import Dashboard from './components/home/Dashboard/Dashboard';
-import Projects from './components/home/Projects/Projects';
 import { Navigate } from 'react-router-dom';
-import MyTasks from './components/home/MyTasks/MyTasks';
-import Calendar from './components/home/Calendar/Calendar';
-import Team from './components/home/Team/Team';
-import Statistics from './components/home/Statistics/Statistics';
-import Settings from './components/home/Settings/Settings';
+import Calendar from './components/home/calendar/Calendar';
+import Dashboard from './components/home/dashboard/Dashboard';
+import Projects from './components/home/projects/Projects';
+import MyTasks from './components/home/my-tasks/MyTasks';
+import Team from './components/home/team/Team';
+import Statistics from './components/home/statistics/Statistics';
+import Settings from './components/home/settings/Settings';
 
 function App() {
   return (

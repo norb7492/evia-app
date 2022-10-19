@@ -1,6 +1,6 @@
-import MessagesComponent from './MessagesComponent/MessagesComponent';
-import ProjectsComponent from './ProjectsComponent/ProjectsComponent';
-import TasksComponent from './TasksComponnet/TaskComponent';
+import MessagesComponent from './messages-component/MessagesComponent';
+import ProjectsComponent from './projects-component/ProjectsComponent';
+import TasksComponent from './tasks-component/TaskComponent';
 
 function DashboardContent() {
   return (
