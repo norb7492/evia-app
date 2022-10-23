@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
-import { DotsVerticalIcon } from '@heroicons/react/outline'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import { BsChevronBarLeft, BsChevronBarRight } from 'react-icons/bs'
 import {
   add,
   eachDayOfInterval,
@@ -60,7 +60,7 @@ const meetings = [
   },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -104,7 +104,7 @@ export default function Calendar() {
                 className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Previous month</span>
-                <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
+                <BsChevronBarLeft className="w-5 h-5" aria-hidden="true" />
               </button>
               <button
                 onClick={nextMonth}
@@ -112,7 +112,7 @@ export default function Calendar() {
                 className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Next month</span>
-                <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
+                <BsChevronBarRight className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
             <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
@@ -198,7 +198,7 @@ export default function Calendar() {
   )
 }
 
-function Meeting({ meeting }) {
+function Meeting({meeting }): JSX.Element {
   let startDateTime = parseISO(meeting.startDatetime)
   let endDateTime = parseISO(meeting.endDatetime)
 
@@ -228,7 +228,7 @@ function Meeting({ meeting }) {
         <div>
           <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-gray-500 hover:text-gray-600">
             <span className="sr-only">Open options</span>
-            <DotsVerticalIcon className="w-6 h-6" aria-hidden="true" />
+            <BsThreeDotsVertical className="w-6 h-6" aria-hidden="true" />
           </Menu.Button>
         </div>
 
