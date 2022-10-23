@@ -1,12 +1,10 @@
 import { AiOutlineProject } from "react-icons/ai";
-import Calendar from "../../Calendar/Calendar";
 
 function DashboardContent() {
   return (
     <div className='bg-slate-700 h-3/4 m-4 rounded-xl p-6'>
-      <section className='grid gap-4 grid-cols-2 grid-rows-2 justify-items-center grid-flow-col md:grid-flow-row sm:grid-flow-row'>
-
-        {/* Widget tasks place start */}
+      <section className='grid gap-10 grid-cols-2 grid-rows-2 justify-items-stretch grid-flow-col md:grid-flow-row sm:grid-flow-row'>
+        {/* Widget place start */}
         <div className='bg-[#252020] rounded-xl w-[450px] h-[400px]'>
           <div className='flex justify-around'>
             <div className='py-5'>
@@ -53,17 +51,9 @@ function DashboardContent() {
             </div>
           </div>
         </div>
-        {/* widget tasks place end */}
+        {/* widget place end */}
 
-        {/* Widget Calendar place start */}
-        <div className='bg-[#252020] rounded-xl w-[450px] h-[400px] flex items-center'>
-          <div className='flex justify-end text-xl py-3 font-bold text-white px-4'>
-            Calendar
-          </div>
-          <hr className="" />
-          <Calendar />
-        </div>
-        {/* Widget Calendar place end */}
+        <div>Widget 3</div>
 
         {/* Widget Chat place start */}
         <div className='bg-[#252020] rounded-xl w-[450px] h-[400px]'>
@@ -86,6 +76,7 @@ function DashboardContent() {
               </div>
             </div>
           </div>
+
         </div>
         {/* widget chat place end */}
 
@@ -117,8 +108,8 @@ function DashboardContent() {
             </div>
           </div>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 }
 
